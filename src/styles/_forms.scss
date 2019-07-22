@@ -1,0 +1,76 @@
+.input-wrapper {
+  @apply mb-6;
+}
+
+input[type='password'],
+input[type='email'],
+input[type='text'],
+select,
+textarea,
+button[type='submit'] {
+  @apply outline-none rounded;
+}
+
+input[type='password'],
+input[type='email'],
+input[type='text'],
+select,
+textarea {
+  @apply border;
+
+  &:focus {
+    @apply border-gray-700;
+  }
+}
+
+input[type='password'],
+input[type='email'],
+input[type='text'],
+button[type='submit'] {
+  @apply py-4 px-8 w-full block;
+}
+
+button[type='submit'] {
+  transition: background-color .1s ease, box-shadow .2s ease;
+  @apply rounded bg-green text-white;
+
+  &:hover {
+    @apply bg-green-400 shadow-md;
+  }
+}
+
+input[type='checkbox'] {
+  position: absolute;
+  visibility: hidden;
+
+  + label {
+    display: flex;
+
+    @apply select-none;
+
+    &::before {
+      height: 24px;
+      width: 24px;
+      content: '';
+      display: inline-flex;
+      align-self: flex-start;
+      margin-right: 15px;
+      transition: border 0.1s ease, background-image 0.1s ease;
+
+      @apply border rounded;
+    }
+  }
+
+  &:checked {
+    + label {
+      &::before {
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%231DE278' d='M18.71 7.21a1 1 0 0 0-1.42 0l-7.45 7.46-3.13-3.14A1 1 0 1 0 5.29 13l3.84 3.84a1 1 0 0 0 1.42 0l8.16-8.16a1 1 0 0 0 0-1.47z'/%3E%3C/svg%3E");
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: 16px;
+
+        @apply border-green;
+      }
+    }
+  }
+}
