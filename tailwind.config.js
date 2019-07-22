@@ -8,7 +8,7 @@ module.exports = {
     },
     borderColor: theme => ({
       ...theme('colors'),
-      default: theme('colors.gray.600', 'currentColor')
+      default: theme('colors.gray.500', 'currentColor')
     }),
     colors: {
       white: {
@@ -76,8 +76,15 @@ module.exports = {
     extend: {
       container: {
         center: true,
-        padding: '1.5rem',
-      }
+        padding: '1.5rem'
+      },
+      boxShadow: theme => ({
+        outline: '0 0 0 3px rgba(201, 198, 198,0.5)',
+        'green-outline': `0 0 0 3px ${theme(
+          'colors.green.500',
+          'currentColor'
+        )}`
+      })
     }
   },
   variants: {},

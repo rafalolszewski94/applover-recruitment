@@ -1,6 +1,6 @@
 <template>
-  <div class="container mt-10">
-    <form action="" class="my-6">
+  <div class="container mt-10 mb-6">
+    <form action="">
       <h1 class="mb-6">Login</h1>
 
       <div class="input-wrapper">
