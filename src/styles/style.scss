@@ -15,8 +15,8 @@ body {
 
 body {
   font-family: Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-    'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji',
-    'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji',
+  'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   color: #7e7e7e;
 }
 
@@ -50,14 +50,27 @@ h1 {
   color: #727272;
 }
 
+.user {
+  @apply inline-flex justify-center items-center ml-4;
+
+  a {
+    background-color: #77779D;
+    border-color: #77779D;
+
+    @apply border text-white flex-grow block whitespace-no-wrap rounded leading-tight px-3 py-2;
+  }
+}
 
 .slide-in-out-enter-active {
-  transition: all .15s ease;
+  transition: all 0.15s ease;
 }
+
 .slide-in-out-leave-active {
-  transition: all .15s cubic-bezier(0.1, 0.3, 0.5, 1.0);
+  transition: all 0.15s cubic-bezier(0.1, 0.3, 0.5, 1);
 }
-.slide-in-out-enter, .slide-in-out-leave-to {
+
+.slide-in-out-enter,
+.slide-in-out-leave-to {
   transform: translateY(-60px);
   opacity: 0;
 }

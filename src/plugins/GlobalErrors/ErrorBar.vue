@@ -27,8 +27,17 @@ export default {
       visible: false,
       content: '',
       onClose: {},
-      timeout: false
+      timeout: 4000
     };
+  },
+  watch: {
+    visible(newVal) {
+      const component = this;
+
+      if (newVal) {
+        setTimeout(this.hide, component.timeout);
+      }
+    }
   },
   methods: {
     hide() {
@@ -38,6 +47,8 @@ export default {
       this.visible = true;
       this.content = params.content;
       this.onClose = params.onClose;
+
+      if (params.timeout) this.timeout = params.timeout;
     }
   },
   beforeMount() {

@@ -1,6 +1,6 @@
 <template>
   <div class="progress-overlay">
-    <canvas ref="blur-canvas"></canvas>
+    <canvas ref="blur"></canvas>
     <h2>Processing...</h2>
 
     <div class="progress-overlay-wrapper">
@@ -19,14 +19,11 @@ export default {
     };
   },
   mounted() {
-    const canvas = document.getElementById('blur');
+    const canvas = this.$refs.blur;
     const ctx = canvas.getContext('2d');
-    ctx.filter = 'blur(15px)';
-    ctx.fillStyle = {
-      type: String,
-      default: '#F00'
-    };
-    ctx.fill();
+    ctx.fillStyle = 'rgba(173,178,181,0.83)';
+    ctx.fillRect(0, 0, window.innerWidth, window.innerHeight);
+    ctx.filter = 'blur(5px)';
   }
 };
 </script>
@@ -38,10 +35,5 @@ export default {
   width: 100%;
   left: 0;
   top: 0;
-
-  canvas {
-    height: 100%;
-    width: 100%;
-  }
 }
 </style>
