@@ -1,3 +1,14 @@
+const hexToRgb = hex => {
+  var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+  return result
+    ? {
+        r: parseInt(result[1], 16),
+        g: parseInt(result[2], 16),
+        b: parseInt(result[3], 16)
+      }
+    : null;
+};
+
 module.exports = {
   theme: {
     screens: {
@@ -80,10 +91,11 @@ module.exports = {
       },
       boxShadow: theme => ({
         outline: '0 0 0 3px rgba(201, 198, 198,0.5)',
-        'green-outline': `0 0 0 3px ${theme(
-          'colors.green.500',
-          'currentColor'
-        )}`
+        'green-outline': `0 0 0 3px rgba(${
+          hexToRgb(theme('colors.green.500', 'currentColor')).r
+        }, ${hexToRgb(theme('colors.green.500', 'currentColor')).g}, ${
+          hexToRgb(theme('colors.green.500', 'currentColor')).b
+        }, 0.5)`
       })
     }
   },

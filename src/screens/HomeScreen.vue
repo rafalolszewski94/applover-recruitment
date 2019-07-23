@@ -1,6 +1,6 @@
 <template>
   <div class="container mt-10 mb-6">
-    <form action="">
+    <form action="" @submit.prevent="signIn">
       <h1 class="mb-6">Login</h1>
 
       <div class="input-wrapper">
@@ -10,6 +10,7 @@
           id="id_email_address"
           placeholder="Email address"
           v-model="email"
+          required
         />
       </div>
 
@@ -20,6 +21,7 @@
           id="id_password"
           placeholder="Password"
           v-model="password"
+          required
         />
       </div>
 
@@ -39,6 +41,8 @@
 </template>
 
 <script>
+import Api from '../api';
+
 export default {
   name: 'HomeScreen',
   data() {
@@ -47,6 +51,31 @@ export default {
       password: '',
       remember_me: ''
     };
+  },
+  methods: {
+    showErrorBar(content = '') {
+      const params = {
+        content
+      };
+      this.$errorBar.show(params);
+    },
+    signIn() {
+      Api('/api/v1/login', {
+        method: 'POST',
+        body: {
+          email: this.email,
+          passsword: this.password
+        }
+      })
+        .then(response => {
+          return response;
+        })
+        .catch(error => {
+          if (error.statusCode === 401) {
+            this.showErrorBar('Invalid email or password');
+          }
+        });
+    }
   }
 };
 </script>

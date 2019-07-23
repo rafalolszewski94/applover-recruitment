@@ -1,5 +1,7 @@
 <template>
   <div id="app">
+    <error-bar />
+    <progress-overlay />
     <header class="flex items-center">
       <div class="container flex w-full items-center">
         <img src="./assets/logo.png" srcset="./assets/logo@2x.png 2x" />
@@ -20,8 +22,13 @@
 </template>
 
 <script>
+import ProgressOverlay from './components/ProgressOverlay';
+
 export default {
   name: 'App',
+  components: {
+    ProgressOverlay
+  },
   data() {
     return {
       language: 'en'

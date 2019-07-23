@@ -20,11 +20,44 @@ body {
   color: #7e7e7e;
 }
 
-header {
+header,
+.error-bar {
   height: 80px;
   box-shadow: 0 3px 12px rgba(#c9c9c9, 0.16);
+
+  @apply flex items-center;
+}
+
+.error-bar {
+  @apply bg-red-500 w-full text-white justify-center absolute;
+
+  button {
+    height: 100%;
+    width: 80px;
+
+    @apply inline-flex items-center justify-center absolute right-0 outline-none;
+
+    svg {
+      max-height: 24px;
+      max-width: 24px;
+
+      @apply flex-grow;
+    }
+  }
 }
 
 h1 {
   color: #727272;
+}
+
+
+.slide-in-out-enter-active {
+  transition: all .15s ease;
+}
+.slide-in-out-leave-active {
+  transition: all .15s cubic-bezier(0.1, 0.3, 0.5, 1.0);
+}
+.slide-in-out-enter, .slide-in-out-leave-to {
+  transform: translateY(-60px);
+  opacity: 0;
 }
