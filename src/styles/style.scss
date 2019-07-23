@@ -104,3 +104,22 @@ h1 {
 .slide-in-out-small-leave-to {
   transform: translateY(-10px);
 }
+
+@keyframes spin360 {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.loader {
+  display: inline-block;
+  border: 3px solid rgba(255, 255, 255, 0.1);
+  border-left-color: rgba(black, 0.1);
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  margin: -5px 0 -6px;
+  animation: spin360 1s linear infinite;
+}

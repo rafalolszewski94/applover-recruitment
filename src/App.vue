@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <error-bar />
+    <progress-overlay :progress="40" v-if="showProgressOverlay" />
     <header class="flex items-center">
       <div class="container flex w-full items-center">
         <img src="./assets/logo.png" srcset="./assets/logo@2x.png 2x" />
@@ -9,9 +10,10 @@
           <label for="id_language" class="hidden xs:inline-block">
             Select language:
           </label>
-          <select name="language" id="id_language" v-model="language">
-            <option value="en">English</option>
-            <option value="pl">Polish</option>
+          <select name="language" id="id_language" v-model="$i18n.locale">
+            <option v-for="(lang, i) in langs" :key="`Lang${i}`" :value="lang">
+              {{ lang }}
+            </option>
           </select>
 
           <div class="user" v-if="isLoggedIn">
@@ -46,8 +48,9 @@ export default {
   },
   data() {
     return {
-      language: 'en',
-      dropdownVisible: false
+      langs: ['en', 'pl'],
+      dropdownVisible: false,
+      showProgressOverlay: false
     };
   },
   computed: {

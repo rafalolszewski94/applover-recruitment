@@ -35,7 +35,12 @@
         <label for="id_remember_me">Keep me logged in</label>
       </div>
 
-      <button type="submit" :disabled="lock">Login</button>
+      <button type="submit" :disabled="lock" :class="{ locked: lock }">
+        <span class="loader" v-if="lock"></span>
+        <template v-else>
+          {{ $t('login') }}
+        </template>
+      </button>
     </form>
   </div>
 </template>
