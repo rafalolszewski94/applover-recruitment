@@ -14,28 +14,59 @@
             <option value="pl">Polish</option>
           </select>
 
-          <div class="user">
-            <a href="#">My organization</a>
+          <div class="user" v-if="isLoggedIn">
+            <div class="dropdown">
+              <a href="#" class="toggle" @click="toggleDropdown"
+                >My organization</a
+              >
+              <transition name="slide-in-out-small">
+                <div v-if="dropdownVisible" v-on-clickaway="hideDropdown">
+                  <a href="#" @click="logout">Logout</a>
+                </div>
+              </transition>
+            </div>
           </div>
         </div>
       </div>
     </header>
+
     <router-view />
   </div>
 </template>
 
 <script>
+import { mixin as clickaway } from 'vue-clickaway';
 import ProgressOverlay from './components/ProgressOverlay';
 
 export default {
   name: 'App',
+  mixins: [clickaway],
   components: {
     ProgressOverlay
   },
   data() {
     return {
-      language: 'en'
+      language: 'en',
+      dropdownVisible: false
     };
+  },
+  computed: {
+    isLoggedIn() {
+      return this.$store.getters['auth/isLoggedIn'];
+    }
+  },
+  methods: {
+    toggleDropdown() {
+      this.dropdownVisible = !this.dropdownVisible;
+    },
+    hideDropdown() {
+      this.dropdownVisible = false;
+    },
+    logout() {
+      this.$store.dispatch('auth/logout').then(() => {
+        this.$router.push({ name: 'LoginScreen' });
+      });
+    }
   }
 };
 </script>

@@ -35,22 +35,20 @@
         <label for="id_remember_me">Keep me logged in</label>
       </div>
 
-      <button type="submit">Login</button>
+      <button type="submit" :disabled="lock">Login</button>
     </form>
   </div>
 </template>
 
 <script>
-import Api from '../api';
-import { lsSet } from '../utils';
-
 export default {
   name: 'HomeScreen',
   data() {
     return {
       email: 'login@applover.pl',
       password: 'password123',
-      remember_me: false
+      remember_me: false,
+      lock: false
     };
   },
   methods: {
@@ -62,24 +60,15 @@ export default {
     },
     signIn() {
       const { email, password } = this;
+      const rememberMe = this.remember_me;
 
-      Api('/api/v1/login', {
-        method: 'POST',
-        body: {
-          email,
-          password
-        },
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-          Host: 'example.org'
-        }
-      })
-        .then(response => {
-          if (response.status) {
-            lsSet('is_authenticated', true);
-            this.$router.push('HomeScreen');
-          }
+      this.lock = true;
+
+      this.$store
+        .dispatch('auth/login', { email, password, rememberMe })
+        .then(() => {
+          this.lock = false;
+          this.$router.push({ name: 'HomeScreen' });
         })
         .catch(error => {
           if (error.statusCode === 401) {
@@ -87,8 +76,9 @@ export default {
           } else if (error.statusCode === 500) {
             this.showErrorBar('Internal server error, please try again!');
           } else {
-            this.showErrorBar('Success');
+            this.showErrorBar('Unknown error, please try again!');
           }
+          this.lock = false;
         });
     }
   }

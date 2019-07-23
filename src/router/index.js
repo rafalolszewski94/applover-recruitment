@@ -3,7 +3,7 @@ import Router from 'vue-router';
 import HomeScreen from '@/screens/HomeScreen';
 import NotFoundScreen from '@/screens/NotFoundScreen';
 import LoginScreen from '@/screens/LoginScreen';
-import { lsGet } from '../utils';
+import store from '../store';
 
 Vue.use(Router);
 
@@ -32,14 +32,14 @@ const router = new Router({
 
 router.beforeEach((to, from, next) => {
   if (to.matched.some(route => route.meta.requiresAuth)) {
-    if (lsGet('is_authenticated') == null) {
-      next({
-        path: '/login',
-        params: { nextUrl: to.fullPath }
-      });
-    } else {
+    if (store.getters['auth/isLoggedIn']) {
       next();
+      return;
     }
+    next({
+      path: '/login',
+      params: { nextUrl: to.fullPath }
+    });
   } else {
     next();
   }

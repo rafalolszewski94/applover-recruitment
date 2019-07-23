@@ -5,4 +5,6 @@ const lsSet = (key, value) => ls.setItem(`${prefix}-${key}`, value);
 
 const lsGet = key => ls.getItem(`${prefix}-${key}`);
 
-export { ls, lsSet, lsGet };
+const lsRemove = key => ls.removeItem(`${prefix}-${key}`);
+
+export { ls, lsSet, lsGet, lsRemove };
