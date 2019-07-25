@@ -3,6 +3,9 @@ import Router from 'vue-router';
 import HomeScreen from '@/screens/HomeScreen';
 import NotFoundScreen from '@/screens/NotFoundScreen';
 import LoginScreen from '@/screens/LoginScreen';
+import ChooseDoor from '@/screens/HomeScreen/ChooseDoor';
+import ChooseDivision from '@/screens/HomeScreen/ChooseDivision';
+import ChooseColor from '@/screens/HomeScreen/ChooseColor';
 import store from '../store';
 
 Vue.use(Router);
@@ -13,6 +16,36 @@ const router = new Router({
       path: '/',
       name: 'HomeScreen',
       component: HomeScreen,
+      redirect: { name: 'ChooseDoor' },
+      children: [
+        {
+          path: 'door',
+          name: 'ChooseDoor',
+          component: ChooseDoor,
+          step: {
+            id: 1,
+            title: 'Choose door'
+          }
+        },
+        {
+          path: 'division',
+          name: 'ChooseDivision',
+          component: ChooseDivision,
+          step: {
+            id: 2,
+            title: 'Choose Division'
+          }
+        },
+        {
+          path: 'color',
+          name: 'ChooseColor',
+          component: ChooseColor,
+          step: {
+            id: 1,
+            title: 'Choose Color'
+          }
+        }
+      ],
       meta: {
         requiresAuth: true
       }

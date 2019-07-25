@@ -4,26 +4,32 @@
     <progress-overlay :progress="40" v-if="showProgressOverlay" />
     <header class="flex items-center">
       <div class="container flex w-full items-center">
-        <img src="./assets/logo.png" srcset="./assets/logo@2x.png 2x" />
+        <router-link to="/">
+          <img src="./assets/logo.png" srcset="./assets/logo@2x.png 2x" />
+        </router-link>
 
         <div class="ml-auto flex items-center">
           <label for="id_language" class="hidden xs:inline-block">
-            Select language:
+            {{ $t('header.select_language') }}
           </label>
           <select name="language" id="id_language" v-model="$i18n.locale">
-            <option v-for="(lang, i) in langs" :key="`Lang${i}`" :value="lang">
-              {{ lang }}
+            <option
+              v-for="(lang, i) in langs"
+              :key="`Lang${i}`"
+              :value="lang.code"
+            >
+              {{ lang.display }}
             </option>
           </select>
 
           <div class="user" v-if="isLoggedIn">
             <div class="dropdown">
-              <a href="#" class="toggle" @click="toggleDropdown"
-                >My organization</a
-              >
+              <a href="#" class="toggle" @click="toggleDropdown">{{
+                $t('header.my_organization')
+              }}</a>
               <transition name="slide-in-out-small">
                 <div v-if="dropdownVisible" v-on-clickaway="hideDropdown">
-                  <a href="#" @click="logout">Logout</a>
+                  <a href="#" @click="logout">{{ $t('logout') }}</a>
                 </div>
               </transition>
             </div>
@@ -48,7 +54,10 @@ export default {
   },
   data() {
     return {
-      langs: ['en', 'pl'],
+      langs: [
+        { code: 'en', display: 'English' },
+        { code: 'pl', display: 'Polish' }
+      ],
       dropdownVisible: false,
       showProgressOverlay: false
     };

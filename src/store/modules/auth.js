@@ -1,6 +1,6 @@
 /* eslint no-shadow: 0 */
 import Api from '../../api';
-import { lsRemove, lsSet } from '../../utils';
+import { lsRemove, lsSet, ssRemove, ssSet } from '../../utils';
 
 const state = {
   status: '',
@@ -17,7 +17,7 @@ const getters = {
 const actions = {
   login({ commit }, { email, password, rememberMe }) {
     return new Promise((resolve, reject) => {
-      commit('auth_request');
+      commit('authRequest');
       Api('/api/v1/login', {
         method: 'POST',
         body: {
@@ -32,14 +32,18 @@ const actions = {
       })
         .then(response => {
           if (response.status) {
-            if (rememberMe) lsSet('user', email);
-            commit('auth_success', email);
+            if (rememberMe) {
+              lsSet('user', email).then();
+            } else {
+              ssSet('user', email).then();
+            }
+            commit('authSuccess', email);
             resolve(response);
           }
         })
         .catch(error => {
-          commit('auth_error');
-          lsRemove('user');
+          commit('authError');
+          lsRemove('user').then();
           reject(error);
         });
     });
@@ -47,7 +51,8 @@ const actions = {
   logout({ commit }) {
     return new Promise(resolve => {
       commit('logout');
-      lsRemove('user');
+      lsRemove('user').then();
+      ssRemove('user').then();
       resolve();
     });
   }
@@ -55,14 +60,14 @@ const actions = {
 
 // mutations
 const mutations = {
-  auth_request(state) {
+  authRequest(state) {
     state.status = 'loading';
   },
-  auth_success(state, userEmail) {
+  authSuccess(state, userEmail) {
     state.status = 'success';
     state.user = userEmail;
   },
-  auth_error(state) {
+  authError(state) {
     state.status = 'error';
   },
   logout(state) {

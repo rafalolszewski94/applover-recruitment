@@ -73,7 +73,7 @@ export default {
         .dispatch('auth/login', { email, password, rememberMe })
         .then(() => {
           this.lock = false;
-          this.$router.push({ name: 'HomeScreen' });
+          this.$router.push({ name: 'ChooseDoor' });
         })
         .catch(error => {
           if (error.statusCode === 401) {
@@ -99,5 +99,15 @@ form {
 
 h1 {
   @apply text-center;
+}
+
+button[type='submit'] {
+  transition: background-color 0.1s ease, box-shadow 0.2s ease;
+
+  @apply rounded bg-green text-white border border-green;
+
+  &:not(.locked):hover {
+    @apply bg-green-400 shadow-md;
+  }
 }
 </style>
