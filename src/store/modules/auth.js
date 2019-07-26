@@ -1,6 +1,6 @@
 /* eslint no-shadow: 0 */
 import Api from '../../api';
-import { lsRemove, lsSet, ssRemove, ssSet } from '../../utils';
+import { asyncLsRemove, asyncLsSet, ssRemove, ssSet } from '../../utils';
 
 const state = {
   status: '',
@@ -33,7 +33,7 @@ const actions = {
         .then(response => {
           if (response.status) {
             if (rememberMe) {
-              lsSet('user', email).then();
+              asyncLsSet('user', email).then();
             } else {
               ssSet('user', email).then();
             }
@@ -43,7 +43,7 @@ const actions = {
         })
         .catch(error => {
           commit('authError');
-          lsRemove('user').then();
+          asyncLsRemove('user').then();
           reject(error);
         });
     });
@@ -51,7 +51,7 @@ const actions = {
   logout({ commit }) {
     return new Promise(resolve => {
       commit('logout');
-      lsRemove('user').then();
+      asyncLsRemove('user').then();
       ssRemove('user').then();
       resolve();
     });

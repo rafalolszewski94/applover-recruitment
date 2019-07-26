@@ -1,6 +1,6 @@
 const baseURL = process.env.API_URL || 'https://bench-api.applover.pl';
 
-const responseCheck = response => {
+export const responseCheck = response => {
   if (response.ok) {
     return response;
   }
@@ -11,7 +11,7 @@ const responseCheck = response => {
   throw error;
 };
 
-const parseJSON = res => res.json();
+export const parseJSON = res => res.json();
 
 const Api = (url, options = {}) => {
   if (!url.startsWith('/')) {

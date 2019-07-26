@@ -7,6 +7,7 @@ import router from './router';
 import ErrorBar from './plugins/GlobalErrors';
 import store from './store';
 import { localAndSessionGet } from './utils';
+import { parseJSON, responseCheck } from './api';
 import en from './locale/en';
 import pl from './locale/pl';
 
@@ -18,14 +19,48 @@ Vue.use(VeeValidate, {
 });
 Vue.use(ErrorBar);
 
-const messages = { en, pl };
-const i18n = new VueI18n({
-  locale: 'en',
+export const messages = { en, pl };
+export const i18n = new VueI18n({
+  locale: store.getters['locale/currentLangCode'] || 'en',
   messages
 });
 
+const handleGeoPermission = () => {
+  navigator.permissions.query({ name: 'geolocation' }).then(result => {
+    if (result.state === 'prompt') {
+      navigator.geolocation.getCurrentPosition(onSuccess => {
+        fetch(
+          `https://eu1.locationiq.com/v1/reverse.php?key=f33c14dac4e325&lat=${onSuccess.coords.latitude}&lon=${onSuccess.coords.longitude}&format=json`
+        )
+          .then(responseCheck)
+          .then(parseJSON)
+          .then(res =>
+            store.dispatch(
+              'locale/setLanguage',
+              res.address.country_code !== 'pl'
+                ? 'en'
+                : res.address.country_code
+            )
+          );
+      });
+    }
+  });
+};
+
 /* eslint-disable no-new */
 localAndSessionGet('user')
+  .then(userEmail => {
+    if ('geolocation' in navigator) {
+      handleGeoPermission();
+    } else {
+      const lang =
+        navigator.language ||
+        (navigator.languages && navigator.languages[0]) ||
+        navigator.userLanguage;
+      store.dispatch('locale/setLanguage', lang);
+    }
+    return userEmail;
+  })
   .then(userEmail => {
     if (userEmail) store.commit('auth/authSuccess', userEmail);
   })

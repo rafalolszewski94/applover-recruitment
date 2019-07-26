@@ -22,7 +22,7 @@ const router = new Router({
           path: 'door',
           name: 'ChooseDoor',
           component: ChooseDoor,
-          step: {
+          meta: {
             id: 1,
             title: 'Choose door'
           }
@@ -31,7 +31,7 @@ const router = new Router({
           path: 'division',
           name: 'ChooseDivision',
           component: ChooseDivision,
-          step: {
+          meta: {
             id: 2,
             title: 'Choose Division'
           }
@@ -40,8 +40,8 @@ const router = new Router({
           path: 'color',
           name: 'ChooseColor',
           component: ChooseColor,
-          step: {
-            id: 1,
+          meta: {
+            id: 3,
             title: 'Choose Color'
           }
         }

@@ -4,7 +4,8 @@ import {
   MAX_DOOR_WIDTH,
   MAX_DOOR_HEIGHT,
   MAX_DOOR_BEAMS,
-  MAX_DOOR_POSTS
+  MAX_DOOR_POSTS,
+  DOOR_COLORS
 } from '../../constants';
 
 const state = {
@@ -12,7 +13,8 @@ const state = {
   door_width: 120,
   door_height: 280,
   door_beams: 4,
-  door_posts: 3
+  door_posts: 3,
+  door_color: DOOR_COLORS.BLACK.hex
 };
 
 // getters
@@ -21,7 +23,8 @@ const getters = {
   doorWidth: state => state.door_width,
   doorHeight: state => state.door_height,
   doorBeams: state => Number(state.door_beams),
-  doorPosts: state => Number(state.door_posts)
+  doorPosts: state => Number(state.door_posts),
+  doorColor: state => state.door_color
 };
 
 // actions
@@ -44,6 +47,9 @@ const actions = {
   setDoorPosts({ commit }, postsCount) {
     if (postsCount > MAX_DOOR_POSTS) return;
     commit('setDoorPosts', postsCount);
+  },
+  setDoorColor({ commit }, colorHex) {
+    commit('setDoorColor', colorHex);
   }
 };
 
@@ -63,6 +69,9 @@ const mutations = {
   },
   setDoorPosts(state, postsCount) {
     state.door_posts = postsCount;
+  },
+  setDoorColor(state, colorHex) {
+    state.door_color = colorHex;
   }
 };
 

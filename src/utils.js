@@ -1,16 +1,20 @@
 const prefix = require('../package.json').name;
 
-const lsSet = async (key, value) => {
+const lsGet = key => {
+  return window.localStorage.getItem(`${prefix}-${key}`);
+};
+
+const asyncLsSet = async (key, value) => {
   await null;
   return window.localStorage.setItem(`${prefix}-${key}`, value);
 };
 
-const lsGet = async key => {
+const asyncLsGet = async key => {
   await null;
   return window.localStorage.getItem(`${prefix}-${key}`);
 };
 
-const lsRemove = async key => {
+const asyncLsRemove = async key => {
   await null;
   return window.localStorage.removeItem(`${prefix}-${key}`);
 };
@@ -41,4 +45,13 @@ const localAndSessionGet = async key => {
   return result;
 };
 
-export { lsSet, lsGet, lsRemove, ssSet, ssGet, ssRemove, localAndSessionGet };
+export {
+  lsGet,
+  asyncLsSet,
+  asyncLsGet,
+  asyncLsRemove,
+  ssSet,
+  ssGet,
+  ssRemove,
+  localAndSessionGet
+};

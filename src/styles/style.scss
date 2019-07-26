@@ -64,16 +64,29 @@ h1 {
     right: 0;
     top: 100%;
     margin-top: 5px;
-    width: 200px;
+    width: 300px;
 
     @apply absolute bg-white shadow py-2 rounded;
 
-    a {
+    a,
+    span {
       @apply block py-2 px-4;
 
+      small {
+        @apply block font-bold;
+      }
+    }
+
+    a {
       &:hover {
         @apply bg-gray-100;
       }
+    }
+
+    span.divider {
+      height: 1px;
+
+      @apply bg-gray-200 w-full block p-0 my-2;
     }
   }
 }

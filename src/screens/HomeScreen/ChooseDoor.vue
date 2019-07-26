@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h6>Door type</h6>
+    <h6>{{ $t('door_type') }}</h6>
 
     <div class="input-wrapper">
       <input
@@ -10,7 +10,7 @@
         :value="SINGLE_WING_TYPE"
         v-model="doorType"
       />
-      <label for="id_single">Single door</label>
+      <label for="id_single">{{ $t('door_wing_single') }}</label>
     </div>
     <div class="input-wrapper">
       <input
@@ -20,13 +20,13 @@
         :value="DOUBLE_WING_TYPE"
         v-model="doorType"
       />
-      <label for="id_double">Double door</label>
+      <label for="id_double">{{ $t('door_wing_double') }}</label>
     </div>
 
-    <h6 class="mt-8">Door size</h6>
+    <h6 class="mt-8">{{ $t('door_size') }}</h6>
 
     <div class="input-wrapper">
-      <label for="id_door_width" class="w-16">Width</label>
+      <label for="id_door_width" class="w-16">{{ $t('width') }}</label>
       <input
         type="number"
         :min="100"
@@ -38,7 +38,7 @@
       <span class="ml-2">cm</span>
     </div>
     <div class="input-wrapper">
-      <label for="id_door_height" class="w-16">Height</label>
+      <label for="id_door_height" class="w-16">{{ $t('height') }}</label>
       <input
         type="number"
         :min="200"

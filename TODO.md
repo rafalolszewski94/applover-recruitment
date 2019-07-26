@@ -5,15 +5,15 @@
 - [x] Disasble login button when logging in
 - [x] Header error display
 - [x] Header dropdown for org
-- [ ] Header org fetch when signed in  with this endpoint [Apitome Documentation](https://bench-api.applover.pl/api/docs#organizations-display-organization)
+- [X] Header org fetch when signed in  with this endpoint [Apitome Documentation](https://bench-api.applover.pl/api/docs#organizations-display-organization)
 - [ ] The website should support two languages - Polish and English. Language should be set up based on the browser’s settings and fallback to English if browser language is not supported within the app. Additionally, user can specify the language himself by select box with list of available languages. 
-- [ ] When a user has successfully logged in he can access the configurator. Configurator allows us to set: 
+- [x] When a user has successfully logged in he can access the configurator. Configurator allows us to set: 
 	- [x] Doors - single / double wing
 	- [x] Width (max 160cm) / height (max 300cm)
 	- [x] Number of beams and posts (symmetrical - max 4)
-	- [ ] Color
+	- [x] Color
 - [ ] Optionally:
-	- [ ] If the browser’s location tracking is enabled, website should first attempt to set the language based on user’s location. 
+	- [x] If the browser’s location tracking is enabled, website should first attempt to set the language based on user’s location. 
 	- [ ] 3D View
 	- [ ] Location
 	- [ ] Tests

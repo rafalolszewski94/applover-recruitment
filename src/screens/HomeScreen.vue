@@ -6,13 +6,13 @@
           <li
             v-for="(step, i) in steps"
             :key="`Step${i}`"
-            :class="{ active: step.active }"
+            :class="{ active: $router.currentRoute.meta.id === step.id }"
           >
             <span
               class="step"
               :class="{ 'hide-after': i + 1 === steps.length }"
             ></span>
-            <span>Step {{ i + 1 }}</span>
+            <span>{{ $t('step') }} {{ i + 1 }}</span>
             <h6>{{ step.title }}</h6>
           </li>
         </ul>
@@ -47,7 +47,8 @@
                       class="doors"
                       :style="{
                         width: `${doorWidth}px`,
-                        height: `${doorHeight}px`
+                        height: `${doorHeight}px`,
+                        color: doorColor
                       }"
                     >
                       <tbody>
@@ -104,28 +105,23 @@
 <script>
 export default {
   name: 'HomeScreen',
-  data() {
-    return {
-      steps: [
+  computed: {
+    steps() {
+      return [
         {
           id: 1,
-          title: 'Choose door',
-          active: true
+          title: this.$i18n.t('steps.choose_door')
         },
         {
           id: 2,
-          title: 'Choose door division',
-          active: false
+          title: this.$i18n.t('steps.choose_division')
         },
         {
           id: 3,
-          title: 'Choose color',
-          active: false
+          title: this.$i18n.t('steps.choose_color')
         }
-      ]
-    };
-  },
-  computed: {
+      ];
+    },
     doorType: {
       get() {
         return this.$store.getters['configurator/doorType'];
@@ -155,6 +151,9 @@ export default {
     },
     doorPosts() {
       return this.$store.getters['configurator/doorPosts'];
+    },
+    doorColor() {
+      return this.$store.getters['configurator/doorColor'];
     }
   },
   methods: {
@@ -389,19 +388,19 @@ table.doors {
 }
 
 .beam {
-  border-bottom: 7px solid #5a5858;
+  border-bottom: 7px solid currentColor;
   height: 60px;
 
   &:first-of-type {
-    border-top: 7px solid #5a5858;
+    border-top: 7px solid currentColor;
   }
 }
 
 .post {
-  border-right: 7px solid #5a5858;
+  border-right: 7px solid currentColor;
 
   &:first-of-type {
-    border-left: 7px solid #5a5858;
+    border-left: 7px solid currentColor;
   }
 }
 

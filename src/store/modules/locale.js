@@ -1,5 +1,5 @@
 /* eslint no-shadow: 0 */
-import { lsGet, lsSet } from '../../utils';
+import { asyncLsSet, lsGet } from '../../utils';
 
 const state = {
   language_code: ''
@@ -7,22 +7,16 @@ const state = {
 
 // getters
 const getters = {
-  currentCode: state => state.language_code
+  currentLangCode: state => {
+    return state.language_code || lsGet('lang');
+  }
 };
 
 // actions
 const actions = {
   setLanguage({ commit }, langCode) {
-    return new Promise((resolve, reject) => {
-      const lsValue = () => lsGet('lang').then();
-      lsSet('lang', langCode).then();
-
-      if (lsValue() === langCode) {
-        commit('localeSetLanguage', langCode);
-        resolve(langCode);
-      } else {
-        reject();
-      }
+    asyncLsSet('lang', langCode).then(() => {
+      commit('localeSetLanguage', langCode);
     });
   }
 };
