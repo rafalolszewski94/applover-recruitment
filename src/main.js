@@ -1,6 +1,8 @@
 import Vue from 'vue';
 import VueI18n from 'vue-i18n';
 import VeeValidate from 'vee-validate';
+import validationMessagesEn from 'vee-validate/dist/locale/en';
+import validationMessagesPl from 'vee-validate/dist/locale/pl';
 import './styles/style.scss';
 import App from './App';
 import router from './router';
@@ -14,16 +16,22 @@ import pl from './locale/pl';
 Vue.config.productionTip = false;
 
 Vue.use(VueI18n);
-Vue.use(VeeValidate, {
-  fastExit: false
-});
-Vue.use(ErrorBar);
 
 export const messages = { en, pl };
 export const i18n = new VueI18n({
   locale: store.getters['locale/currentLangCode'] || 'en',
   messages
 });
+Vue.use(VeeValidate, {
+  fastExit: false,
+  i18nRootKey: 'validations', // customize the root path for validation messages.
+  i18n,
+  dictionary: {
+    en: validationMessagesEn,
+    pl: validationMessagesPl,
+  }
+});
+Vue.use(ErrorBar);
 
 const handleGeoPermission = () => {
   navigator.permissions.query({ name: 'geolocation' }).then(result => {
@@ -34,14 +42,14 @@ const handleGeoPermission = () => {
         )
           .then(responseCheck)
           .then(parseJSON)
-          .then(res =>
+          .then(res => {
             store.dispatch(
               'locale/setLanguage',
               res.address.country_code !== 'pl'
                 ? 'en'
                 : res.address.country_code
-            )
-          );
+            );
+          });
       });
     }
   });

@@ -1,9 +1,9 @@
 <template>
   <div>
-    <h6>Door division</h6>
+    <h6>{{ $t('door_division') }}</h6>
 
     <div class="input-wrapper">
-      <label for="id_beams">Number of beams</label>
+      <label for="id_beams">{{ $t('number_of_beams') }}</label>
       <input
         type="number"
         min="1"
@@ -17,7 +17,7 @@
         }"
         data-vv-as="door beams"
       />
-      <ul>
+      <ul class="v-errors" v-if="errors.has('door_beams')">
         <li
           v-for="(error, i) in errors.collect('door_beams')"
           :key="`ErrorBeams(${i})`"
@@ -27,7 +27,7 @@
       </ul>
     </div>
     <div class="input-wrapper">
-      <label for="id_posts">Number of posts</label>
+      <label for="id_posts">{{ $t('number_of_posts') }}</label>
       <input
         type="number"
         min="1"
@@ -39,9 +39,9 @@
           min_value: 1,
           max_value: 4
         }"
-        data-vv-as="door posts"
+        :data-vv-as="$t('door_error_vv_posts')"
       />
-      <ul>
+      <ul class="v-errors" v-if="errors.has('door_posts')">
         <li
           v-for="(error, i) in errors.collect('door_posts')"
           :key="`ErrorPosts(${i})`"
@@ -101,5 +101,9 @@ input[type='number'] {
 
 .input-wrapper {
   @apply flex items-center mb-3;
+}
+
+label {
+  min-width: 160px;
 }
 </style>

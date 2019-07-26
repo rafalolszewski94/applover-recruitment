@@ -8,10 +8,11 @@
         v-for="(color, i) in doorColors"
         :key="`Color(${i})`"
       >
-        <span
+        <label
+          :for="`id_color_${i}`"
           class="colorDisplay"
           :style="{ backgroundColor: color.hex }"
-        ></span>
+        ></label>
         <input
           type="radio"
           name="door_color"

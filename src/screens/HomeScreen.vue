@@ -344,6 +344,7 @@ export default {
 
 .sidebar {
   margin-left: 30px;
+  width: 235px;
 
   @apply flex flex-col;
 

@@ -21,10 +21,15 @@ export default {
   },
   door_type: 'Door type',
   door_size: 'Door size',
+  door_division: 'Door division',
+  door_color: 'Door color',
   door_wing_single: 'Single door',
   door_wing_double: 'Double door',
   width: 'Width',
   height: 'Height',
+  number_of_beams: 'Number of beams',
+  number_of_posts: 'Number of posts',
+  door_error_vv_posts: 'door posts',
 
   organization: {
     name: 'Name',

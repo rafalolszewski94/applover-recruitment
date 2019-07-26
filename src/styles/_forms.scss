@@ -1,5 +1,5 @@
 .input-wrapper {
-  @apply mb-6;
+  @apply mb-6 relative;
 }
 
 input[type='password'],
@@ -134,4 +134,16 @@ select {
   background-size: 20px;
 
   @apply appearance-none pl-3 pr-10 py-2 ml-4;
+}
+
+.v-errors {
+  position: absolute;
+  bottom: 100%;
+  margin-bottom: 4px;
+
+  @apply bg-red-500 p-1 rounded text-white shadow-md;
+
+  li {
+
+  }
 }

@@ -21,10 +21,15 @@ export default {
   },
   door_type: 'Typ drzwi',
   door_size: 'Wymiary drzwi',
+  door_division: 'Podział drzwi',
+  door_color: 'Kolor drzwi',
   door_wing_single: 'Pojedyńcze',
   door_wing_double: 'Podwójne',
   width: 'Szerokość',
   height: 'Wysokość',
+  number_of_beams: 'Ilość poziomych belek',
+  number_of_posts: 'Ilość pionowych słupków',
+  door_error_vv_posts: 'słupków',
 
   organization: {
     name: 'Nazwa',

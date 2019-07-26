@@ -8,7 +8,7 @@ const state = {
 // getters
 const getters = {
   currentLangCode: state => {
-    return state.language_code || lsGet('lang');
+    return state.language_code || lsGet('lang') || 'en';
   }
 };
 

@@ -65,8 +65,9 @@ h1 {
     top: 100%;
     margin-top: 5px;
     width: 300px;
+    z-index: 2;
 
-    @apply absolute bg-white shadow py-2 rounded;
+    @apply absolute bg-white shadow-md py-2 rounded;
 
     a,
     span {
