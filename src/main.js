@@ -28,7 +28,7 @@ Vue.use(VeeValidate, {
   i18n,
   dictionary: {
     en: validationMessagesEn,
-    pl: validationMessagesPl,
+    pl: validationMessagesPl
   }
 });
 Vue.use(ErrorBar);
